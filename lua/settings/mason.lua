@@ -15,7 +15,46 @@ local navbuddy = require('nvim-navbuddy')
 
 mason_lspconfig.setup_handlers({
   function(server_name)
+
+    local node_root_dir = nvim_lsp.util.root_pattern("package.json")
+    local is_node_repo = node_root_dir(vim.api.nvim_buf_get_name(0)) ~= nil
+
     local opts = {}
+
+    if server_name == "tsserver" then
+      if not is_node_repo then
+        return
+      end
+
+      opts.root_dir = node_root_dir
+    elseif server_name == "eslint" then
+      if not is_node_repo then
+        return
+      end
+
+      opts.root_dir = node_root_dir
+    elseif server_name == "denols" then
+      if is_node_repo then
+        return
+      end
+
+      opts.root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc", "deps.ts", "import_map.json")
+      opts.init_options = {
+        lint = true,
+        unstable = true,
+        suggest = {
+          imports = {
+            hosts = {
+              ["https://deno.land"] = true,
+              ["https://cdn.nest.land"] = true,
+              ["https://crux.land"] = true
+            }
+          }
+        }
+      }
+    end
+
+    -- キーマップ定義
     opts.on_attach = function(_, bufnr)
       local bufopts = { silent = true, buffer = bufnr }
       -- 定義ジャンプ
@@ -27,47 +66,8 @@ mason_lspconfig.setup_handlers({
       vim.keymap.set('n', '<space>f', vim.lsp.buf.format, bufopts)
     end
 
-
-    if server_name == "tsserver" then
-      -- tsserverがroot_dirを貫通して有効化されるため、package.jsonの有無でdenolsを切り替える
-      local node_root_dir = nvim_lsp.util.root_pattern("package.json")
-      local is_node_repo = node_root_dir(vim.api.nvim_buf_get_name(0)) ~= nil
-
-      if is_node_repo then
-        nvim_lsp["tsserver"].setup({
-          single_file_support = false,
-          opts.on_attach
-        })
-        return
-      end
-
-      if not is_node_repo then
-        nvim_lsp["denols"].setup({
-          opts.on_attach,
-          settings = {
-            deno = {
-              config = "deno.json",
-              lint = true,
-              unstable = true,
-              suggest = {
-                imports = {
-                  hosts = {
-                    ["https://deno.land"] = true,
-                    ["https://cdn.nest.land"] = true,
-                    ["https://crux.land"] = true
-                  }
-                }
-              }
-            }
-          }
-        })
-       return
-      end
-    else
       nvim_lsp[server_name].setup(opts)
     end
-
-  end
 })
 
 navic.setup {
