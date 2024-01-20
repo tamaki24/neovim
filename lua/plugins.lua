@@ -16,20 +16,12 @@ require("lazy").setup({
   'nvim-tree/nvim-web-devicons',
   -- 日本語ヘルプ
   'vim-jp/vimdoc-ja',
-  -- 日本語入力
-  -- {
-  --   'vim-skk/skkeleton',
-  --   config = function ()
-  --     require('settings/skkeleton')
-  --   end
-  -- },
-  -- 小道具
   {
-    'echasnovski/mini.nvim',
-    version = false,
-    config = function()
-      require('settings/mini')
-    end
+  "shellRaining/hlchunk.nvim",
+  event = { "UIEnter" },
+  config = function()
+    require("settings/hlchunk")
+  end
   },
   -- ターミナル
   'voldikss/vim-floaterm',
