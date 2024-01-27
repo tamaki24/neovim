@@ -6,7 +6,7 @@ local config = {
     -- セクション区切りの装飾
     section_separators = { left = '', right = '' },
     component_separators = { left = '', right = '' },
-    theme = 'nord'
+    theme = 'nightfly'
   },
   sections = {
     lualine_a = {

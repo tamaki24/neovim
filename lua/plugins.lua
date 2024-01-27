@@ -95,28 +95,43 @@ require("lazy").setup({
     end
   },
   -- バッファタブをかっこよく
+  -- {
+  --   'romgrk/barbar.nvim',
+  --   dependencies = {
+  --     'nvim-tree/nvim-web-devicons',
+  --     'lewis6991/gitsigns.nvim',
+  --   },
+  --   -- event = { 'BufNewFile', 'BufRead' },
+  --   -- 設定ファイルは/settings/*にまとめた
+  --   config = function()
+  --     -- require('settings/barbar')
+  --   end
+  -- },
   {
-    'romgrk/barbar.nvim',
-    dependencies = {
-      'nvim-tree/nvim-web-devicons',
-      'lewis6991/gitsigns.nvim',
-    },
-    event = { 'BufNewFile', 'BufRead' },
-    -- 設定ファイルは/settings/*にまとめた
+    'akinsho/bufferline.nvim',
+    version = "*",
+    dependencies = 'nvim-tree/nvim-web-devicons',
     config = function()
-      require('settings/barbar')
+      require('settings/bufferline')
     end
   },
+  -- ColorScheme
   {
     'shaunsingh/nord.nvim',
     config = function()
-      --    require('settings/nord-theme')
+         -- require('settings/nord-theme')
+    end
+  },
+  {
+    'EdenEast/nightfox.nvim',
+    config = function()
+         require('settings/nightfox')
     end
   },
   {
     "rmehri01/onenord.nvim",
     config = function()
-      require('settings/onenord')
+      -- require('settings/onenord')
     end
   },
   -- 通知
@@ -224,9 +239,9 @@ require("lazy").setup({
     dependencies = {
       'MunifTanjim/prettier.nvim',
     },
-    -- config = function()
-    --   require('settings/null-ls')
-    -- end
+    config = function()
+      require('settings/null-ls')
+    end
   },
   -- 定義ジャンプ
   {
