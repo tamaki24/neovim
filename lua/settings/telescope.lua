@@ -7,8 +7,9 @@ local function telescope_buffer_dir()
   return vim.fn.expand('%:p:h')
 end
 
+--[[
 local fb_actions = require "telescope".extensions.file_browser.actions
-
+]]
 telescope.setup {
   defaults = {
     mappings = {
@@ -49,7 +50,8 @@ telescope.setup {
         ["q"] = actions.close
       },
     },
-  },
+  }
+  --[[
   extensions = {
     file_browser = {
       theme = "dropdown",
@@ -71,6 +73,7 @@ telescope.setup {
       },
     },
   },
+  --]]
 }
 
 -- 頻出ソート提供

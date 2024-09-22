@@ -81,12 +81,29 @@ require("lazy").setup({
       require('nvim-autopairs').setup({})
     end
   },
+--[[ エラー吐くので一旦コメントアウト
   {
     'windwp/nvim-ts-autotag',
     config = function()
-      require('nvim-ts-autotag').setup({})
+      require('nvim-ts-autotag').setup({
+        opts = {
+          -- Defaults
+          enable_close = true, -- Auto close tags
+          enable_rename = true, -- Auto rename pairs of tags
+          enable_close_on_slash = false -- Auto close on trailing </
+        },
+        -- Also override individual filetype configs, these take priority.
+        -- Empty by default, useful if one of the "opts" global settings
+        -- doesn't work well in a specific filetype
+        per_filetype = {
+          ["html"] = {
+            enable_close = false
+          }
+        }
+      })
     end
   },
+]]
   -- コメントアウト
   {
     'numToStr/Comment.nvim',
@@ -125,13 +142,13 @@ require("lazy").setup({
   {
     'EdenEast/nightfox.nvim',
     config = function()
-         require('settings/nightfox')
+         --require('settings/nightfox')
     end
   },
   {
     "rmehri01/onenord.nvim",
     config = function()
-      -- require('settings/onenord')
+       require('settings/onenord')
     end
   },
   -- 通知
@@ -159,7 +176,7 @@ require("lazy").setup({
       require('settings/cursorline')
     end
   },
-  -- ファジーファインダー
+  --[[ ファジーファインダー
   {
     'nvim-telescope/telescope-file-browser.nvim',
     dependencies = {
@@ -173,6 +190,7 @@ require("lazy").setup({
       require('settings/telescope')
     end
   },
+  ]]
   -- ファイラ
   {
     'nvim-tree/nvim-tree.lua',
@@ -234,6 +252,7 @@ require("lazy").setup({
       require('settings/lspkind')
     end
   },
+--[[ 撤退しちゃった
   {
     'jose-elias-alvarez/null-ls.nvim',
     dependencies = {
@@ -242,6 +261,12 @@ require("lazy").setup({
     config = function()
       require('settings/null-ls')
     end
+  },
+]]
+  {
+    'nvimtools/none-ls.nvim',
+    dependencies = 'nvim-lua/plenary.nvim',
+    config = true,
   },
   -- 定義ジャンプ
   {

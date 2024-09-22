@@ -38,3 +38,11 @@ keymap.set("n", "<tab>", "<Cmd>bnext<CR>", { silent = true })
 
 -- エラーメッセージ
 keymap.set("n", "<Leader>e", vim.diagnostic.open_float, {silent = true});
+
+-- format
+vim.keymap.set('n', '<localleader>ff', function()
+  vim.lsp.buf.format {
+    timeout_ms = 200,
+    async = true,
+  }
+end)
