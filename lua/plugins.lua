@@ -17,11 +17,11 @@ require("lazy").setup({
   -- 日本語ヘルプ
   'vim-jp/vimdoc-ja',
   {
-  "shellRaining/hlchunk.nvim",
-  event = { "UIEnter" },
-  config = function()
-    require("settings/hlchunk")
-  end
+    "shellRaining/hlchunk.nvim",
+    event = { "UIEnter" },
+    config = function()
+      require("settings/hlchunk")
+    end
   },
   -- ターミナル
   'voldikss/vim-floaterm',
@@ -81,7 +81,7 @@ require("lazy").setup({
       require('nvim-autopairs').setup({})
     end
   },
---[[ エラー吐くので一旦コメントアウト
+  --[[ エラー吐くので一旦コメントアウト
   {
     'windwp/nvim-ts-autotag',
     config = function()
@@ -136,19 +136,19 @@ require("lazy").setup({
   {
     'shaunsingh/nord.nvim',
     config = function()
-         -- require('settings/nord-theme')
+      -- require('settings/nord-theme')
     end
   },
   {
     'EdenEast/nightfox.nvim',
     config = function()
-         --require('settings/nightfox')
+      --require('settings/nightfox')
     end
   },
   {
     "rmehri01/onenord.nvim",
     config = function()
-       require('settings/onenord')
+      require('settings/onenord')
     end
   },
   -- 通知
@@ -252,7 +252,7 @@ require("lazy").setup({
       require('settings/lspkind')
     end
   },
---[[ 撤退しちゃった
+  --[[ 撤退しちゃった
   {
     'jose-elias-alvarez/null-ls.nvim',
     dependencies = {
@@ -285,5 +285,12 @@ require("lazy").setup({
     config = function()
       require('settings/colorizer')
     end
+  },
+  -- python3用
+  {
+    'GCBallesteros/jupytext.nvim',
+    config = true,
+    -- ft = "ipynb",
+    lazy = false,
   }
 })

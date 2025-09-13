@@ -13,7 +13,7 @@ local mason_lspconfig = require('mason-lspconfig')
 local navic = require('nvim-navic')
 local navbuddy = require('nvim-navbuddy')
 
-mason_lspconfig.setup_handlers({
+mason_lspconfig.setup({
   function(server_name)
 
     local node_root_dir = nvim_lsp.util.root_pattern("package.json")
